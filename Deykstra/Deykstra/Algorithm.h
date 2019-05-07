@@ -29,6 +29,8 @@ private:
 	}
 public:
 	Algorithm(int _n, int _s) {
+		bool flag;
+		srand(15);
 		vector < pair <int, vector <pair<int, int>>>> v1(_n);
 		v = v1;
 		vector<int>p1(_n);
@@ -39,11 +41,21 @@ public:
 			/*vector <pair<int, int>> v2(m);
 			v[i].second = v2;*/
 			int l = v[i].second.size();
-			for (int j = 0; j<m-l; j++) {//создаем ребра для i вершины
+			for (int j = 0; j<m - l; j++) {//создаем ребра для i вершины
 				int a = rand() % (_n - 1);
-				for (int k = 0; k < j+l ; k++) {//проверяем, что такая вершина еще не была сгенерирована
-					while((a == v[i].second[k].first)||(a==i))
+				flag = false;
+				while (!flag) {
+					flag = true;
+					if (a == i) {
 						a = rand() % (_n - 1);
+						flag = false;
+					}
+					for (int k = 0; k < j + l; k++) {//проверяем, что такая вершина еще не была сгенерирована
+						if (a == v[i].second[k].first) {
+							a = rand() % (_n - 1);
+							flag = false;
+						}
+					}
 				}
 				int weight = rand() % 100;
 				v[i].second.push_back(make_pair(a, weight));
