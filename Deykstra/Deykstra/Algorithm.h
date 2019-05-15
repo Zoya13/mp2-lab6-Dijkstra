@@ -27,7 +27,8 @@ private:
 				dfs(to, used, comp);
 		}
 	}
-	bool connect(vector < pair <int, vector <pair<int, int>>>> & _v, int flag)//false-не удовлетворяет//flag=1 => нужно сделать связный граф, 0 - просто проверка
+	bool connect(vector < pair <int, vector <pair<int, int>>>> & _v, int flag)
+		//false-не удовлетворяет//flag=1 => нужно сделать связный граф, 0 - просто проверка
 	{
 
 		for (int i = 0; i < n; i++) {
@@ -61,7 +62,7 @@ private:
 
 	}
 public:
-	Algorithm(int _n, int _s) {
+	void Generate(int _n, int _s) {
 		bool flag;
 		srand(15);
 		vector < pair <int, vector <pair<int, int>>>> v1(_n);
@@ -110,6 +111,10 @@ public:
 		s = _s;
 		bool con = connect(v, 1);
 	}
+	Algorithm() {
+		s = 0;
+		n = 0;
+	}
 	/*Algorithm() {
 	n = 3;
 	s = 0;
@@ -139,7 +144,57 @@ public:
 	v[2].second[1].second = 4;
 
 	}*/
-	bool Check() {//false-не удовлетворяет
+	void Form(int _n, int _s) {
+
+		int y = -1, weight, number = -1;
+		int a;
+		bool flag = true;
+		//int l;
+		n = _n;
+		s = _s;
+		vector < pair <int, vector <pair<int, int>>>> v1(_n);
+		v = v1;
+		vector<int>p1(_n);
+		p = p1;
+		for (int i = 0; i < _n; i++)
+			v[i].first = INF;
+		for (int i = 0; i < _n; i++) {
+			/*cout << endl << "If you want to input a new node choose 1, else choose 2";
+			cin >> l;*/
+
+			number = -1;
+			cout << endl << "A start node of edge: " << i;
+			while ((number < 0) || (number > _n - 1)) {
+				cout << endl << "Input a number of nodes to connect: ";
+				cin >> number;
+			}
+
+			for (int j = 0; j < number; j++) {
+				/*	while ((x < 0) || (x >= _n)) {
+				cout << endl << "Input a start node of edge:";
+				cin >> x;
+				}*/
+				y = -1;
+				while ((y < 0) || (y >= _n)) {
+					cout << endl << "Input a finish node of edge:";
+					cin >> y;
+				}
+				cout << endl << "Input a weight of edge:";
+				cin >> weight;
+				flag = true;
+				for (int k = 0; k <v[i].second.size(); k++) {//проверяем, что такая вершина еще не была сгенерирована
+					if (y == v[i].second[k].first)
+						flag = false;
+				}
+				if ((y != i) && flag) {
+					v[i].second.push_back(make_pair(y, weight));
+					v[y].second.push_back(make_pair(i, weight));
+				}
+			}
+		}
+	}
+	bool Check(int k) {//false-не удовлетворяет
+		if (k == 1) return true;
 		return connect(v, 0);
 	}
 	void RB() {

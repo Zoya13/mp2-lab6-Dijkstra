@@ -16,20 +16,24 @@ int main()
 	int k = 1, l = 1;
 	do {
 		cout << '\n' << "Choose one of the items:" << '\n';
-		string d[2] = { "1. Algorithm","2. Exit" };
-		for (int i = 0; i < 2; i++)
+		string d[3] = { "1. To generate a graph","2. To input a graph","3. Exit" };
+		for (int i = 0; i < 3; i++)
 			cout << d[i] << '\n';
 		cout << endl << "Input a menu number:";
 		cin >> k;
-		if (k != 1) break;
+		if ((k != 1) && (k != 2)) break;
 		else {
 			int number, start, _node = -1;
 			cout << endl << "Input a number of nodes: ";
 			cin >> number;
 			cout << endl << "Input a start node: ";
 			cin >> start;
-			Algorithm A(number, start);
-			if (/*A.Check()*/true) {
+			Algorithm A;
+			if (k == 1)
+				A.Generate(number, start);
+			else
+				A.Form(number, start);
+			if (A.Check(k)) {
 				do {
 					cout << '\n' << "Choose one of the items:" << '\n';
 					string c[2] = { "1. A new node","2. A new algorithm" };
@@ -75,6 +79,6 @@ int main()
 		cout<< endl;
 		}
 		*/
-	} while (k == 1);
+	} while ((k == 1) || (k == 2));
 	system("pause");
 }
