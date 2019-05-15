@@ -8,41 +8,42 @@
 #include<string>
 int main()
 {
+	srand(15);
 	/*Algorithm A;
 	A.RB();
-	A.Way_Cost(1);*/
-	
-	int k=1,l=1;
+	A.Way_Cost(1);
+	*/
+	int k = 1, l = 1;
 	do {
 		cout << '\n' << "Choose one of the items:" << '\n';
 		string d[2] = { "1. Algorithm","2. Exit" };
 		for (int i = 0; i < 2; i++)
 			cout << d[i] << '\n';
-		cout << endl<<"Input a menu number:";
+		cout << endl << "Input a menu number:";
 		cin >> k;
 		if (k != 1) break;
 		else {
-			int number,start,_node=-1;
+			int number, start, _node = -1;
 			cout << endl << "Input a number of nodes: ";
 			cin >> number;
 			cout << endl << "Input a start node: ";
 			cin >> start;
 			Algorithm A(number, start);
-			do {
-				cout << '\n' << "Choose one of the items:" << '\n';
-				string c[2] = { "1. A new node","2. A new algorithm" };
-				for (int i = 0; i < 2; i++)
-					cout << c[i] << '\n';
-				cout << "Input a menu number:";
-				cin >> l;
-				if (l != 1) break;
-				else {
-					_node = -1;
-					while ((_node < 0) || (_node >= number)) {
-						cout << endl << "Input a node (0<=node<number): ";
-						cin >> _node;
-					}
-					if (A.Check()) {
+			if (/*A.Check()*/true) {
+				do {
+					cout << '\n' << "Choose one of the items:" << '\n';
+					string c[2] = { "1. A new node","2. A new algorithm" };
+					for (int i = 0; i < 2; i++)
+						cout << c[i] << '\n';
+					cout << "Input a menu number:";
+					cin >> l;
+					if (l != 1) break;
+					else {
+						_node = -1;
+						while ((_node < 0) || (_node >= number)) {
+							cout << endl << "Input a node (0<=node<number): ";
+							cin >> _node;
+						}
 						A.Print();
 						A.AVL();
 						A.Way_Cost(_node);
@@ -50,26 +51,28 @@ int main()
 						A.Way_Cost(_node);
 						A.HEAP();
 						A.Way_Cost(_node);
+
+
 					}
-					else
-						cout << endl << "It isn't a simply connected graph";
-				}
-			} while (l == 1);
+				} while (l == 1);
+			}
+			else
+				cout << endl << "It isn't a simply connected graph";
 		}
 		/*while (flag) {
-			Algorithm A(20, 2);
-			if (A.Check()) {
-				A.Print();
-				A.AVL();
-				A.Way_Cost(5);
-				A.RB();
-				A.Way_Cost(5);
-				A.HEAP();
-				A.Way_Cost(5);
-			}
-			cout << endl<<"Input k: ";
-			cin >> k;
-			cout<< endl;
+		Algorithm A(20, 2);
+		if (A.Check()) {
+		A.Print();
+		A.AVL();
+		A.Way_Cost(5);
+		A.RB();
+		A.Way_Cost(5);
+		A.HEAP();
+		A.Way_Cost(5);
+		}
+		cout << endl<<"Input k: ";
+		cin >> k;
+		cout<< endl;
 		}
 		*/
 	} while (k == 1);
